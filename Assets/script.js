@@ -12,6 +12,8 @@ const day3 = document.querySelector("#day3");
 const day4 = document.querySelector("#day4");
 let dayArray = [day0, day1, day2, day3, day4];
 
+const pastSearches = document.querySelector("#past-searches");
+
 const weatherIcon = (weather) => {
     let icon;
     switch(weather) {
@@ -72,24 +74,42 @@ const getWeatherData = async(city, state, country) => {
 
         j++;
     }
+}
 
-    // for(let i = 0; i < weatherData.list.length; i += 8){
-    //        console.log("Date: " + weatherData.list[i].dt_txt); 
-    //        console.log("Weather: " + weatherData.list[i].weather[0].main); 
-    //        console.log("Temp: " + weatherData.list[i].main.temp); 
-    //        console.log("Humidity: " + weatherData.list[i].main.humidity); 
-    //        console.log("Wind speed: " + weatherData.list[i].wind.speed); 
-    // }
+const arrayOfCityArrays = [];
+const savePastSearches = (cityArray) => {
+    arrayOfCityArrays.push(cityArray);
+    while (pastSearches.firstChild) {
+        pastSearches.removeChild(pastSearches.firstChild);
+    }
+    for(let i = 0; i < arrayOfCityArrays.length; i++){
+        let cityButton = document.createElement("button");
+        cityButton.setAttribute("class", "past-search");
+        if(arrayOfCityArrays[i][1]){
+            cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][1];
+        } else {
+            cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][2]
+        }
+        pastSearches.appendChild(cityButton);
+    }
 }
 
 const collectSearchData = () => {
+    let cityArray = [];
     let city = citySearch.value;
     let state = stateSearch.value; 
     let country = countrySearch.value;
 
-
+    cityArray.push(city);
+    cityArray.push(state);
+    cityArray.push(country);
+    savePastSearches(cityArray);
 
     getWeatherData(city, state, country);
+
+    citySearch.value = "";
+    stateSearch.value = "";
+    countrySearch.value = "";
 }
 
 
