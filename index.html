@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-    <!-- <link href="./Assets/reset.css" rel="stylesheet" type="text/css" /> -->
     <link href="./Assets/style.css" rel="stylesheet" type="text/css" />
     <script src="./Assets/script.js" defer></script>
     <title>Weather Forecast</title>
@@ -20,22 +19,32 @@
     </header>
     <main>
         <section id="search-section">
+            <h2>Search for a City!</h2>
             <label for="city-search">Enter a city:</label>
-            <input type="text" id="city-search">
+            <input type="text" id="city-search"><br/>
             <label for="state-search">Enter a state:</label>
-            <input type="text" id="state-search">
+            <input type="text" id="state-search"><br/>
             <label for="country-search">Enter a country:</label>
-            <input type="text" id="country-search">
-            <button id="search"></button>
+            <input type="text" id="country-search"><br/>
+            <button id="search">SEARCH</button>
         </section>
         <section id="weather-display">
-            <div id="day1"></div>
+            <div id="day0" class="day-div">
+                <p class="day-title">Today</p>
+            </div>
 
-            <div id="day2" class="future"></div>
-            <div id="day3" class="future"></div>
-            <div id="day4" class="future"></div>
-            <div id="day5" class="future"></div>
-            <div id="day6" class="future"></div>
+            <div id="day1" class="future day-div">
+                <p class="day-title">Tomorrow</p>
+            </div>
+            <div id="day2" class="future day-div">
+                <p class = "day-title"></p>
+            </div>
+            <div id="day3" class="future day-div">
+                <p class = "day-title"></p>
+            </div>
+            <div id="day4" class="future day-div">
+                <p class = "day-title"></p>
+            </div>
         </section>
     </main>
 </body>

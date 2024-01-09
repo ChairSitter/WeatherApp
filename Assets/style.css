@@ -1,3 +1,4 @@
+/*Universal styles*/
 * {
     margin: 0;
 	padding: 0;
@@ -5,11 +6,19 @@
 	vertical-align: baseline;
 }
 
+/*Header*/
+
+header {
+    text-align: center;
+}
+
 h1 {
     background-color: darkblue;
     color: white;
     font-family: 'Bungee', sans-serif;
-    font-size: 3rem;
+    font-size: 5rem;
+    line-height: 120%;
+    text-shadow: 5px 5px black;
 }
 
 nav {
@@ -17,7 +26,82 @@ nav {
     height: 35px;
 }
 
+/*Main*/
+
 main {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    background-color: lightblue;
 }
+
+section {
+    border: 5px dark blue solid;
+    margin-top: 5px;
+}
+
+#search-section {
+    text-align: center;
+}
+
+h2 {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+input {
+    border: solid black 1px;
+    margin: 10px;
+}
+
+#search {
+    margin-top: 30px;
+    height: 40px;
+    width: 80px;
+}
+
+.day-div {
+    background-color: white;
+    text-align: center;
+}
+
+.day-title {
+    font-size: 2rem;
+}
+
+#weather-display {
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    grid-template-rows: 250px 250px;
+    grid-template-areas: 
+    "day1 day1 day1 day1"
+    "day2 day3 day4 day5";
+    border: 3px solid black;
+    grid-gap: 3px;
+    background-color: black;
+}
+
+#day0 {
+    grid-area: day1;
+}
+#day1 {
+    grid-area: day2;
+}
+#day2 {
+    grid-area: day3;
+}
+#day3 {
+    grid-area: day4;
+}
+#day4 {
+    grid-area: day5;
+}
+
+.weather-p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    color: rgb(30, 30, 30)
+}
+
+/* * {
+    border: 1px solid red;
+} */
