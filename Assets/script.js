@@ -15,6 +15,17 @@ const todayTitle = document.querySelector("#today-title");
 
 const pastSearches = document.querySelector("#past-searches");
 
+const twoFromNow = document.querySelector("#two-from-now");
+const threeFromNow = document.querySelector("#three-from-now");
+const fourFromNow = document.querySelector("#four-from-now");
+let now = dayjs();
+let twoFromNowDay = now.add(2, 'day').format("dddd");
+let threeFromNowDay = now.add(3, 'day').format("dddd");
+let fourFromNowDay = now.add(4, 'day').format("dddd");
+twoFromNow.textContent = twoFromNowDay;
+threeFromNow.textContent = threeFromNowDay;
+fourFromNow.textContent = fourFromNowDay;
+
 const weatherIcon = (weather) => {
     let icon;
     switch(weather) {
@@ -46,6 +57,7 @@ const getWeatherData = async(city, state, country) => {
             dayArray[i].removeChild(dayArray[i].children[1]);
         }
     }
+
     // const getLatLonResponse= await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
     // const latLonData = await getLatLonResponse.json();
     // const weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
@@ -67,7 +79,7 @@ const getWeatherData = async(city, state, country) => {
 
         const tempP = document.createElement("p");
         tempP.setAttribute("class", "weather-p");
-        tempP.textContent = "Temp: " + weatherData.list[i].main.temp;
+        tempP.textContent = "Temp: " + weatherData.list[i].main.temp + "° F";
         dayArray[j].appendChild(tempP);
 
         const humidityP = document.createElement("p");
