@@ -4,14 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./Assets/reset.css" rel="stylesheet" type="text/css" />
     <link href="./Assets/style.css" rel="stylesheet" type="text/css" />
     <script src="./Assets/script.js" defer></script>
     <title>Weather Forecast</title>
 </head>
 
 <body>
-    <h1></h1>
-    <nav></nav>
+    <header>
+        <h1>Forecast Finder</h1>
+        <nav></nav>
+    </header>
+    <main>
+        <form id="search-form">
+            <label for="search-bar">Enter a city</label>
+            <input type="text" id="search-bar">
+        </form>
+        <section id="weather-display">
+            <div id="day1"></div>
+
+            <div id="day2" class="future"></div>
+            <div id="day3" class="future"></div>
+            <div id="day4" class="future"></div>
+            <div id="day5" class="future"></div>
+            <div id="day6" class="future"></div>
+        </section>
+    </main>
 </body>
 
 </html>
