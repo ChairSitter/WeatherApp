@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./Assets/reset.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+    <!-- <link href="./Assets/reset.css" rel="stylesheet" type="text/css" /> -->
     <link href="./Assets/style.css" rel="stylesheet" type="text/css" />
     <script src="./Assets/script.js" defer></script>
     <title>Weather Forecast</title>
@@ -16,10 +19,15 @@
         <nav></nav>
     </header>
     <main>
-        <form id="search-form">
-            <label for="search-bar">Enter a city</label>
-            <input type="text" id="search-bar">
-        </form>
+        <section id="search-section">
+            <label for="city-search">Enter a city:</label>
+            <input type="text" id="city-search">
+            <label for="state-search">Enter a state:</label>
+            <input type="text" id="state-search">
+            <label for="country-search">Enter a country:</label>
+            <input type="text" id="country-search">
+            <button id="search"></button>
+        </section>
         <section id="weather-display">
             <div id="day1"></div>
 
