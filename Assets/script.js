@@ -24,11 +24,11 @@ let fourFromNowDay = now.add(4, 'day').format("dddd");
 twoFromNow.textContent = twoFromNowDay;
 threeFromNow.textContent = threeFromNowDay;
 fourFromNow.textContent = fourFromNowDay;
-let day1Date = now.format("MM/DD/YYYY");
-let day2Date = now.add(1, 'day').format("MM/DD/YYYY");
-let day3Date = now.add(2, 'day').format("MM/DD/YYYY");
-let day4Date = now.add(3, 'day').format("MM/DD/YYYY");
-let day5Date = now.add(4, 'day').format("MM/DD/YYYY");
+let day1Date = now.format("M/DD/YYYY");
+let day2Date = now.add(1, 'day').format("M/DD/YYYY");
+let day3Date = now.add(2, 'day').format("M/DD/YYYY");
+let day4Date = now.add(3, 'day').format("M/DD/YYYY");
+let day5Date = now.add(4, 'day').format("M/DD/YYYY");
 let dateArray = [day1Date, day2Date, day3Date, day4Date, day5Date];
 
 const weatherIcon = (weather) => {
@@ -124,16 +124,12 @@ for(let i = 0; i < arrayOfCityArrays.length; i++){
     pastSearchButtonsArr.push(cityButton);
 }
 if(arrayOfCityArrays){
-    console.log(arrayOfCityArrays)
     for(let i = 0; i < pastSearchButtonsArr.length; i++){
         pastSearchButtonsArr[i].addEventListener("click", function(){
             getWeatherData(arrayOfCityArrays[i][0], arrayOfCityArrays[i][1], arrayOfCityArrays[i][2]);
         })
     }   
 }
-
-
-// localStorage.clear();
 
 const addPastSearch = (cityArray) => {
     let isIncluded = false;
