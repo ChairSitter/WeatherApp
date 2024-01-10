@@ -63,9 +63,9 @@ const getWeatherData = async(city, state, country) => {
         }
     }
 
-    const getLatLonResponse= await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+    const getLatLonResponse= await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
     const latLonData = await getLatLonResponse.json();
-    const weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
     const weatherData = await weatherResponse.json();
 
     let j = 0;
