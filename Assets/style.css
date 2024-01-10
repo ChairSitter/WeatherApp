@@ -148,6 +148,9 @@ input {
     }
 }
 @media only screen and (max-width: 700px){
+    h1 {
+        font-size: 3rem;
+    }
     main {
         flex-direction: column;
         text-align: center;
@@ -155,6 +158,12 @@ input {
     #weather-display {
         align-self: center;
         margin-bottom: 500px;
+    }
+    #search {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: 40px;
+        width: 80px;
     }
 }
 
