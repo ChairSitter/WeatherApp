@@ -165,6 +165,26 @@ input {
         height: 40px;
         width: 80px;
     }
+    #weather-display {
+        margin-bottom: 60px;
+        display: grid;
+        height: 250px;
+        width: 400px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "day1 day1 day1 day1"
+        "day2 day3 day4 day5";
+        border: 3px solid black;
+        grid-gap: 3px;
+        background-color: black;
+    }
+    .weather-p {
+        margin-top: 5px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: .8rem;
+        color: rgb(30, 30, 30)
+    }
 }
 
 /* * {
