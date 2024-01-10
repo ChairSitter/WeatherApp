@@ -1,5 +1,4 @@
 //API key = bd3136b1de02f5dec5a45d5eb3dea4e9
-//Displayed per city: Date, Icon representing weather, temp, humidity, wind speed
 const citySearch = document.querySelector("#city-search");
 const stateSearch = document.querySelector("#state-search");
 const countrySearch = document.querySelector("#country-search");
@@ -11,10 +10,10 @@ const day2 = document.querySelector("#day2");
 const day3 = document.querySelector("#day3");
 const day4 = document.querySelector("#day4");
 let dayArray = [day0, day1, day2, day3, day4];
-const todayTitle = document.querySelector("#today-title");
 
 const pastSearches = document.querySelector("#past-searches");
 
+const todayTitle = document.querySelector("#today-title");
 const twoFromNow = document.querySelector("#two-from-now");
 const threeFromNow = document.querySelector("#three-from-now");
 const fourFromNow = document.querySelector("#four-from-now");
@@ -25,6 +24,12 @@ let fourFromNowDay = now.add(4, 'day').format("dddd");
 twoFromNow.textContent = twoFromNowDay;
 threeFromNow.textContent = threeFromNowDay;
 fourFromNow.textContent = fourFromNowDay;
+let day1Date = now.format("MM/DD/YYYY");
+let day2Date = now.add(1, 'day').format("MM/DD/YYYY");
+let day3Date = now.add(2, 'day').format("MM/DD/YYYY");
+let day4Date = now.add(3, 'day').format("MM/DD/YYYY");
+let day5Date = now.add(4, 'day').format("MM/DD/YYYY");
+let dateArray = [day1Date, day2Date, day3Date, day4Date, day5Date];
 
 const weatherIcon = (weather) => {
     let icon;
@@ -50,7 +55,7 @@ const weatherIcon = (weather) => {
     return icon;
 }
 
-//gets city, state, country; finds lat+lon; gets weather data for 5 days
+//gets city, state, country; finds lat+lon; gets weather data for 5 days, displays them
 const getWeatherData = async(city, state, country) => {
     for(let i = 0; i < dayArray.length; i++){
         while (dayArray[i].children[1]) {
@@ -58,10 +63,10 @@ const getWeatherData = async(city, state, country) => {
         }
     }
 
-    // const getLatLonResponse= await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
-    // const latLonData = await getLatLonResponse.json();
-    // const weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
-    // const weatherData = await weatherResponse.json();
+    const getLatLonResponse= await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+    const latLonData = await getLatLonResponse.json();
+    const weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+    const weatherData = await weatherResponse.json();
 
     let j = 0;
     for(let i = 0; i < weatherData.list.length; i += 8){
@@ -69,7 +74,7 @@ const getWeatherData = async(city, state, country) => {
 
         const dateP = document.createElement("p");
         dateP.setAttribute("class", "weather-p");
-        dateP.textContent = "Date: " + weatherData.list[i].dt_txt;
+        dateP.textContent = dateArray[j];
         dayArray[j].appendChild(dateP);
 
         const weatherP = document.createElement("p");
@@ -96,34 +101,86 @@ const getWeatherData = async(city, state, country) => {
     }
 }
 
-const arrayOfCityArrays = [];
-const savePastSearches = (cityArray) => {
-    arrayOfCityArrays.push(cityArray);
+//receive arrayOfCityArrays from storage if there is storage, or create that array if there isn't
+const dataFromStorage = localStorage.getItem("localStorageData");
+let arrayOfCityArrays;
+if(dataFromStorage){
+    arrayOfCityArrays = JSON.parse(dataFromStorage);
+} else {
+    arrayOfCityArrays = [];
+}
+//create buttons for city arrays in "array of city arrays"
+let pastSearchButtonsArr = [];
+for(let i = 0; i < arrayOfCityArrays.length; i++){
+    let cityButton = document.createElement("button");
+    cityButton.setAttribute("class", "past-search");
+    cityButton.setAttribute("id", `button${i}`)
+    if(arrayOfCityArrays[i][1]){
+        cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][1];
+    } else {
+        cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][2];
+    }
+    pastSearches.appendChild(cityButton);
+    pastSearchButtonsArr.push(cityButton);
+}
+if(arrayOfCityArrays){
+    console.log(arrayOfCityArrays)
+    for(let i = 0; i < pastSearchButtonsArr.length; i++){
+        pastSearchButtonsArr[i].addEventListener("click", function(){
+            getWeatherData(arrayOfCityArrays[i][0], arrayOfCityArrays[i][1], arrayOfCityArrays[i][2]);
+        })
+    }   
+}
+
+
+// localStorage.clear();
+
+const addPastSearch = (cityArray) => {
+    let isIncluded = false;
+    for(let i = 0; i < arrayOfCityArrays.length; i++){
+        if(JSON.stringify(arrayOfCityArrays[i]) == JSON.stringify(cityArray)){
+           isIncluded = true;
+        }
+    }
+    if(!isIncluded){
+        arrayOfCityArrays.push(cityArray);
+    }
+
     while (pastSearches.firstChild) {
         pastSearches.removeChild(pastSearches.firstChild);
     }
+    pastSearchButtonsArr = [];
     for(let i = 0; i < arrayOfCityArrays.length; i++){
         let cityButton = document.createElement("button");
         cityButton.setAttribute("class", "past-search");
+        cityButton.setAttribute("id", `button${i}`)
         if(arrayOfCityArrays[i][1]){
             cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][1];
         } else {
             cityButton.textContent = arrayOfCityArrays[i][0] + ", " + arrayOfCityArrays[i][2]
         }
         pastSearches.appendChild(cityButton);
+        pastSearchButtonsArr.push(cityButton);
+    }
+    let stringifiedArray = JSON.stringify(arrayOfCityArrays);
+    localStorage.setItem("localStorageData", stringifiedArray);
+    for(let i = 0; i < pastSearchButtonsArr.length; i++){
+        pastSearchButtonsArr[i].addEventListener("click", function(){
+            getWeatherData(arrayOfCityArrays[i][0], arrayOfCityArrays[i][1], arrayOfCityArrays[i][2]);
+        })
     }
 }
 
 const collectSearchData = () => {
     let cityArray = [];
-    let city = citySearch.value;
-    let state = stateSearch.value; 
-    let country = countrySearch.value;
+    let city = citySearch.value.trim();
+    let state = stateSearch.value.trim(); 
+    let country = countrySearch.value.trim();
 
     cityArray.push(city);
     cityArray.push(state);
     cityArray.push(country);
-    savePastSearches(cityArray);
+    addPastSearch(cityArray);
 
     getWeatherData(city, state, country);
 
@@ -131,9 +188,6 @@ const collectSearchData = () => {
     stateSearch.value = "";
     countrySearch.value = "";
 }
-
-
-
 
 searchButton.addEventListener("click", collectSearchData);
 
