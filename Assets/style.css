@@ -168,8 +168,6 @@ input {
     #weather-display {
         margin-bottom: 60px;
         display: grid;
-        height: 200px;
-        width: 350px;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas: 
