@@ -1,106 +1,36 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Forecast Finder weather application
 
-## Your Task
+https://chairsitter.github.io/WeatherApp/
 
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+![Screenshot of forecast finder application](./Assets/images/Screenshot.jpg)
 
-Use the [5 Day Weather Forecast](https://openweathermap.org/forecast5) to retrieve weather data for cities. The base URL should look like the following: `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`. After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
+## Description
 
-**Hint**: Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
+This application uses the free OpenWeather weather API to provide a 5-day forecast interface for the user. The application accepts a city search and populates data for
+the current day and 4 days into the future. Searches are saved as buttons at the top of the screen, and these buttons persist when the page is re-loaded using local storage.
 
-You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
+- This project was useful to practice navigating API documentation and accessing data from JSON objects. The final product is a useful weather app. 
+- I built this project to provide a useful weather search application and to practice the details involved with accessing information from an API, displaying it, 
+and creating an intuitive interface for the user.
+- This application provides a quick and easy interface for searching US and international weather forecasts, and give the user access to past searches via buttons 
+that do no duplicate when the same search is made again.
+- I learned how to navigate documentation and JSON data objects provided by an API for accessing weather-related database information. I learned techniques to make
+a friendly user interface including buttons that are dynamically created based on unique searches, using a switch statement to convert weather words into icons, and 
+ensuring the same search does not create multiple of the same button. I also learned the unique challenge of programming an application using an API that limits the amount of
+calls per hour, and I commented out the API call code as needed to avoid excess calls. 
 
-## User Story
+## Usage
 
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
+The user can access weather data for the current day and 4 additional days by typing a city name, a 2-letter state code (if US), and a 2-letter country code. 
+The user can quickly access the forecast for a previously-searched city by clicking the appropriate button that populates at the top of the page.
+As this project uses a free API, there is a limit of 60 calls per hour among all users. 
 
-## Acceptance Criteria
+## Credits
 
-```
-GIVEN a weather dashboard with form inputs
+I designed the HTML and CSS layout and the javascript code that accesses weather data and manipulates HTML and CSS code. 
+This project uses the free OpenWeather 5-day forecast API, and credit is due to OpenWeather for providing this free content which is leveraged in the weather app. 
 
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
+## License
 
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
+This project uses a MIT license. Please refer to the MIT license file in this repository.
 
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
-```
-
-## Mock-Up
-
-The following image shows the web application's appearance and functionality:
-
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./Assets/06-server-side-apis-homework-demo.png)
-
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria: 
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria plus the following:
-
-    * Uses the OpenWeather API to retrieve weather data.
-
-    * Uses `localStorage` to store persistent data.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
