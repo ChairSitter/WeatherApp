@@ -155,10 +155,6 @@ input {
         flex-direction: column;
         text-align: center;
     }
-    #weather-display {
-        align-self: center;
-        margin-bottom: 500px;
-    }
     #search {
         margin-top: 10px;
         margin-bottom: 10px;
@@ -166,8 +162,10 @@ input {
         width: 80px;
     }
     #weather-display {
-        margin-bottom: 60px;
+        margin-bottom: 300px;
         display: grid;
+        height: 300px;
+        width: 355px;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas: 
@@ -176,11 +174,14 @@ input {
         border: 3px solid black;
         grid-gap: 3px;
         background-color: black;
+        align-self: center;
+    }
+    .day-title {
+        font-size: 1.25rem;
     }
     .weather-p {
-        margin-top: 5px;
         font-family: 'Times New Roman', Times, serif;
-        font-size: .8rem;
+        font-size: .75rem;
         color: rgb(30, 30, 30)
     }
 }
