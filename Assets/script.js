@@ -34,6 +34,9 @@ let dateArray = [day1Date, day2Date, day3Date, day4Date, day5Date];
 const weatherIcon = (weather) => {
     let icon;
     switch(weather) {
+        case "Thunderstorm":
+            icon = "⚡"
+            break;
         case "Sunny":
             icon = "🥵";
             break;
@@ -43,11 +46,17 @@ const weatherIcon = (weather) => {
         case "Rain":
             icon = "☔";
             break;
+        case "Drizzle":
+            icon = "☔";
+            break;
         case "Clear":
             icon = "☀️"
             break;
         case "Windy":
             icon = "🌀"
+            break;
+        case "Snow":
+            icon = "⛄️"
             break;
         default:
             icon = "☀️"
