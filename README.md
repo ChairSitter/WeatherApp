@@ -32,5 +32,5 @@ This project uses the free OpenWeather 5-day forecast API, and credit is due to 
 
 ## License
 
-This project uses a MIT license. Please refer to the MIT license file in this repository.
+This project uses a MIT license. Please refer to the MIT license file in this repository. 
 

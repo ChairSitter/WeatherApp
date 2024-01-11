@@ -3,6 +3,7 @@ const citySearch = document.querySelector("#city-search");
 const stateSearch = document.querySelector("#state-search");
 const countrySearch = document.querySelector("#country-search");
 const searchButton = document.querySelector("#search");
+const clearButton =  document.querySelector("#clear");
 
 const day0 = document.querySelector("#day0");
 const day1 = document.querySelector("#day1");
@@ -179,8 +180,8 @@ const addPastSearch = (cityArray) => {
 const collectSearchData = () => {
     let cityArray = [];
     let city = citySearch.value.trim();
-    let state = stateSearch.value.trim(); 
-    let country = countrySearch.value.trim();
+    let state = stateSearch.value.trim().toUpperCase(); 
+    let country = countrySearch.value.trim().toUpperCase();
 
     cityArray.push(city);
     cityArray.push(state);
@@ -194,6 +195,15 @@ const collectSearchData = () => {
     countrySearch.value = "";
 }
 
+const clearPastSearches = () => {
+    localStorage.clear();
+    arrayOfCityArrays = [];
+    while (pastSearches.firstChild) {
+        pastSearches.removeChild(pastSearches.firstChild);
+    }
+}
+
 searchButton.addEventListener("click", collectSearchData);
+clearButton.addEventListener("click", clearPastSearches);
 
 
