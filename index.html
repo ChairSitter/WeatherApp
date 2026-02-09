@@ -21,19 +21,26 @@
     </header>
     <main>
         <section id="search-section">
-            <h2>Search for a City:</h2>
-            <label for="city-search">Enter city:</label>
-            <input type="text" id="city-search" placeholder="New York"><br/>
-            <label for="state-search">Enter state (US only):</label>
-            <input type="text" id="state-search" placeholder="NY"><br/>
-            <label for="country-search">Enter country:</label>
-            <input type="text" id="country-search" placeholder="US"><br/>
-            <button id="search">SEARCH</button>
-            <button id="clear">CLEAR</button>
+            <h2>Search for a City</h2>
+            <div class="form-fields">
+                <label for="city-search">City</label>
+                <input type="text" id="city-search" placeholder="e.g. New York">
+                <label for="state-search">State (US only)</label>
+                <input type="text" id="state-search" placeholder="e.g. NY">
+                <label for="country-search">Country code</label>
+                <input type="text" id="country-search" placeholder="e.g. US">
+            </div>
+            <div class="form-actions">
+                <button id="search" type="button">Search</button>
+                <button id="clear" type="button">Clear history</button>
+            </div>
         </section>
-        <section id="weather-display">
+        <section id="weather-display" class="empty">
             <div id="day0" class="day-div">
                 <p id="today-title" class="day-title">Today</p>
+                <p class="placeholder-text">
+                    Search for a city to see a <span class="placeholder-highlight">5‑day forecast</span> with live data.
+                </p>
             </div>
 
             <div id="day1" class="future day-div">

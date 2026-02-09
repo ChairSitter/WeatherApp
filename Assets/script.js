@@ -13,6 +13,7 @@ const day4 = document.querySelector("#day4");
 let dayArray = [day0, day1, day2, day3, day4];
 
 const pastSearches = document.querySelector("#past-searches");
+const weatherDisplay = document.querySelector("#weather-display");
 
 const todayTitle = document.querySelector("#today-title");
 const twoFromNow = document.querySelector("#two-from-now");
@@ -66,50 +67,70 @@ const weatherIcon = (weather) => {
 }
 
 //gets city, state, country; finds lat+lon; gets weather data for 5 days, displays them
-const getWeatherData = async(city, state, country) => {
-    for(let i = 0; i < dayArray.length; i++){
+const getWeatherData = async (city, state, country) => {
+    // Clear previous content (keep day titles)
+    for (let i = 0; i < dayArray.length; i++) {
         while (dayArray[i].children[1]) {
             dayArray[i].removeChild(dayArray[i].children[1]);
         }
     }
 
-    const getLatLonResponse= await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
-    const latLonData = await getLatLonResponse.json();
-    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
-    const weatherData = await weatherResponse.json();
+    // Loading state: pulse animation and dimmed display
+    weatherDisplay.classList.remove("empty");
+    weatherDisplay.classList.remove("just-loaded");
+    weatherDisplay.classList.add("is-loading");
+    searchButton.disabled = true;
 
-    let j = 0;
-    for(let i = 0; i < weatherData.list.length; i += 8){
-        todayTitle.textContent = `Today in ${city}:`;
+    try {
+        const getLatLonResponse = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+        const latLonData = await getLatLonResponse.json();
+        const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latLonData[0].lat}&lon=${latLonData[0].lon}&units=imperial&appid=bd3136b1de02f5dec5a45d5eb3dea4e9`);
+        const weatherData = await weatherResponse.json();
 
-        const dateP = document.createElement("p");
-        dateP.setAttribute("class", "weather-p");
-        dateP.textContent = dateArray[j];
-        dayArray[j].appendChild(dateP);
+        let j = 0;
+        for (let i = 0; i < weatherData.list.length; i += 8) {
+            todayTitle.textContent = `Today in ${city}:`;
 
-        const weatherP = document.createElement("p");
-        weatherP.setAttribute("class", "weather-p");
-        weatherP.textContent = weatherIcon(weatherData.list[i].weather[0].main);
-        dayArray[j].appendChild(weatherP);
+            const dateP = document.createElement("p");
+            dateP.setAttribute("class", "weather-p");
+            dateP.textContent = dateArray[j];
+            dayArray[j].appendChild(dateP);
 
-        const tempP = document.createElement("p");
-        tempP.setAttribute("class", "weather-p");
-        tempP.textContent = "Temp: " + weatherData.list[i].main.temp + "° F";
-        dayArray[j].appendChild(tempP);
+            const weatherP = document.createElement("p");
+            weatherP.setAttribute("class", "weather-p");
+            weatherP.textContent = weatherIcon(weatherData.list[i].weather[0].main);
+            dayArray[j].appendChild(weatherP);
 
-        const humidityP = document.createElement("p");
-        humidityP.setAttribute("class", "weather-p");
-        humidityP.textContent = "Humidity: " + weatherData.list[i].main.humidity;
-        dayArray[j].appendChild(humidityP);
+            const tempP = document.createElement("p");
+            tempP.setAttribute("class", "weather-p");
+            tempP.textContent = "Temp: " + weatherData.list[i].main.temp + "° F";
+            dayArray[j].appendChild(tempP);
 
-        const windSpeedP = document.createElement("p");
-        windSpeedP.setAttribute("class", "weather-p");
-        windSpeedP.textContent = "Wind speed: " + weatherData.list[i].wind.speed;
-        dayArray[j].appendChild(windSpeedP);
+            const humidityP = document.createElement("p");
+            humidityP.setAttribute("class", "weather-p");
+            humidityP.textContent = "Humidity: " + weatherData.list[i].main.humidity;
+            dayArray[j].appendChild(humidityP);
 
-        j++;
+            const windSpeedP = document.createElement("p");
+            windSpeedP.setAttribute("class", "weather-p");
+            windSpeedP.textContent = "Wind speed: " + weatherData.list[i].wind.speed;
+            dayArray[j].appendChild(windSpeedP);
+
+            j++;
+        }
+
+        // Data arrived: remove loading, trigger entrance animation
+        weatherDisplay.classList.remove("is-loading");
+        weatherDisplay.classList.add("just-loaded");
+        searchButton.disabled = false;
+
+        // Remove entrance class after animation so next search can replay it
+        setTimeout(() => weatherDisplay.classList.remove("just-loaded"), 600);
+    } catch (err) {
+        weatherDisplay.classList.remove("is-loading", "just-loaded");
+        searchButton.disabled = false;
     }
-}
+};
 
 //receive arrayOfCityArrays from storage if there is storage, or create that array if there isn't
 const dataFromStorage = localStorage.getItem("localStorageData");
